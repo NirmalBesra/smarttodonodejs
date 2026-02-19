@@ -48,6 +48,7 @@ app.delete('/deletetodo',(req,res,next)=>{
        const stmt = db.prepare('DELETE from todo  WHERE id = ?');
        stmt.run(req.body.id);
        res.send(`${req.body.id} has been deleted successfully`).status(200);
+       console.log("it got deleted"+req.body.id);
     }
     catch(e)
     {
