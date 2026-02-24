@@ -16,8 +16,8 @@ app.post("/posttodo",(req,res)=>{
         const { taskname, priority, desc } = req.body;
         const stmt = db.prepare('INSERT INTO todo (taskname, priority, desc) VALUES(?,?,?)');
         const result = stmt.run(taskname, priority, desc);
-        res.send("success");
-        // res.json({id: result.lastInsertRowid,taskname, priority});  
+        //res.send("success");
+        res.json({id: result.lastInsertRowid,taskname, priority});  
     }
     catch(e){
         console.log(e);
