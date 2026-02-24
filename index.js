@@ -14,9 +14,8 @@ app.post("/posttodo",(req,res)=>{
     try 
     {
         const { taskname, priority, desc } = req.body;
-        const stmt = db.prepare('INSERT INTO todo (taskname, priority, desc) VALUES(?,?,?)');
-        const result = stmt.run(taskname, priority, desc);
-        //res.send("success");
+        const stmt = db.prepare('INSERT INTO todo (taskname, priority) VALUES(?,?)');
+        const result = stmt.run(taskname, priority  );
         res.json({id: result.lastInsertRowid,taskname, priority});  
     }
     catch(e){
@@ -31,9 +30,9 @@ app.put("/updatetodo",(req,res)=>{
     try 
     {
         const { taskname, priority, desc, id } = req.body;
-        const stmt = db.prepare('UPDATE todo SET taskname = ? , priority = ? , desc = ? WHERE id = ?');
-        const result = stmt.run(taskname, priority, desc , id);
-        res.send("success");
+        const stmt = db.prepare('UPDATE todo SET taskname = ? , priority = ? WHERE id = ?');
+        const result = stmt.run(taskname, priority, desc , iscompleted, id);
+        res.json({id: result.lastInsertRowid,taskname, priority}); 
          
     }
     catch(e){
